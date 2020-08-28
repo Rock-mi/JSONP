@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsonp-copybaidu</title>
+    <style>
+        *{margin:0;padding:0}
+        body{
+            width:50%;
+            margin:100px auto;
+            /* text-align: center; */
+        }
+        input{
+            height:30px;width:400px;
+        }
+        li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="search" id="sch" autofocus="autofocus" >
+    <ul id="ul">
+
+    </ul>
+
+
+
+    <script>
+        //https://www.baidu.com/sugrec?prod=pc&wd=%E6%B3%95&cb=call
+        var sch = document.getElementById('sch');
+        var ul = document.getElementById('ul');
+        var headele = document.getElementsByTagName('head')[0];
+        sch.oninput = function(){
+            // console.log(333)
+            var scriptele = document.createElement('script');
+            scriptele.src = "https://www.baidu.com/sugrec?prod=pc&wd=" + sch.value + "&cb=call";
+            headele.appendChild( scriptele );
+        }
+        function call( json ){
+            ul.innerHTML = '';
+            for( var i = 0;i<json.g.length;i++ ){
+                // console.log(json.g[i].q)
+                var li = document.createElement('li');
+                li.innerHTML = json.g[i].q;
+                ul.appendChild( li );
+            }
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>
